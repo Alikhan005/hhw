@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="title">Your Todos</h2>
+    <a href="{% url 'add_todo' %}" class="button is-success">Add Todo</a>
+    
+    <div class="box">
+        {% for todo in todos %}
+            <div class="notification {% if todo.status %}is-success{% else %}is-warning{% endif %}">
+                <p><strong>{{ todo.title }}</strong></p>
+                <p>{{ todo.description }}</p>
+                <p>Due: {{ todo.due_date }}</p>
+                <a href="{% url 'todo_detail' todo.id %}" class="button is-link is-small">View</a>
+                <a href="{% url 'delete_todo' todo.id %}" class="button is-danger is-small">Delete</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
