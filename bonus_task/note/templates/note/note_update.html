@@ -1,0 +1,27 @@
+<!-- note/templates/note/note_update.html -->
+{% extends 'base.html' %}
+
+{% block title %}Редактировать: {{ note.title }}{% endblock %}
+
+{% block content %}
+    <h1>Редактировать заметку: {{ note.title }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Заголовок</label>
+            <input type="text" name="title" id="title"
+                   class="form-control"
+                   value="{{ note.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="content" class="form-label">Содержание</label>
+            <textarea name="content" id="content"
+                      class="form-control"
+                      rows="4">{{ note.content }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="{% url 'note_detail' note.pk %}" class="btn btn-secondary">Отмена</a>
+    </form>
+{% endblock %}
